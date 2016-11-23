@@ -38,8 +38,7 @@ while pumpstate == 'off' or 'on':
 
     elif firstmenuselection == '3':
         print ''
-        print 'Please enter the timer interval in minutes'
-        print '4 hours is 240 minutes'
+        print 'Please enter the timer interval in hours'
         print ''
 
         try:
@@ -47,7 +46,7 @@ while pumpstate == 'off' or 'on':
 
             pumpstate = 'on'
             print 'The pump has been turned on for the specified amount of time, and will be turned off automatically'
-            time.sleep (pumptimer * 60)
+            time.sleep (pumptimer * 60 * 60)
             pumpstate = 'off'
             print ''
             print 'Timer has expired, and the pump has been turned off'
