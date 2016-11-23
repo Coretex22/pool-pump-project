@@ -45,7 +45,7 @@ while pumpstate == 'off' or 'on':
                 print 'The pump is now on'
                 print ''
 
-        elif pumpfalseboolean == False:
+        elif pumpfalseboolean == True:
                 pumpstate = 'off'
                 GPIO.output(11, GPIO.LOW)
                 print ''
