@@ -17,6 +17,10 @@ while pumpstate == 'off' or 'on':
 
     firstmenuselection = raw_input()
 
+
+#SELECTION 1
+
+
     if firstmenuselection == '1':
         print ''
         print 'Please enter a new pump state (on or off): '
@@ -24,17 +28,30 @@ while pumpstate == 'off' or 'on':
         newpumpstate = raw_input()
         print ''
 
-        pumpboolean = newpumpstate in 'on, On, ON, off, OFF, Off, OFF'
+        pumptrueboolean = newpumpstate in 'on, On, ON'
+        pumpfalseboolean = newpumpstate in 'off, Off, OFF'
 
-        if pumpboolean == True:
-                pumpstate = newpumpstate
+        if pumptrueboolean == True:
+                pumpstate = 'on'
+
+        elif pumpfalseboolean == False:
+                pumpstate = 'off'
 
         else: print 'Please make a valid selection'
         time.sleep (1)
+
+
+#SELECTION 2
+
+
     elif firstmenuselection == '2':
         print ''
         print 'Pump is currently', pumpstate
         print ''
+
+
+#SELECTION 3
+
 
     elif firstmenuselection == '3':
         print ''
