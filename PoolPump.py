@@ -1,12 +1,11 @@
 #This program is written to remotely control a pool pump using a RaspberryPi's GPIO Pins.
 
-#This is because I don't know how to list shit properly yet:
 import time
 
 pumpstate = 'off'
 
 while pumpstate == 'off' or 'on':
-
+#This is because I don't know how to list shit properly yet:
     print ''
     print 'Please choose an option:'
     print ''
