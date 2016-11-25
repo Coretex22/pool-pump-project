@@ -12,6 +12,7 @@ while pumpstate == 'off' or 'on':
     print '1: Enter a new pump state'
     print '2: View current pump state'
     print '3: Set the pump on a timer'
+    print '4: Modify a schedule'
     print ''
 
     firstmenuselection = raw_input()
@@ -58,7 +59,7 @@ while pumpstate == 'off' or 'on':
         print ''
 
         try:
-            pumptimer = int(input())
+            pumptimer = int(raw_input())
 
             pumpstate = 'on'
             print 'The pump has been turned on for the specified amount of time, and will be turned off automatically'
@@ -68,8 +69,48 @@ while pumpstate == 'off' or 'on':
             print 'Timer has expired, and the pump has been turned off'
             print ''
 
-        except NameError:
+        except ValueError:
             print 'Please enter a valid integer'
+
+
+#SELECTION 4
+
+
+    elif firstmenuselection == '4':
+        print ''
+        print 'Please enter the period of time the pump will run for'
+        print ''
+
+        while pumpstate = 'off'
+        try:
+            pumptimeoninput = int(raw_input())
+            pumpstate = 'on'
+            #GPIO ON
+            time.sleep (pumptimeoninput * 60 * 60)
+            pumpstate = 'off'
+            #GPIO OFF
+            
+
+        except ValueError:
+            print ''
+            print 'Please enter the number of hours for active, and the hours for sleep'
+            print ''
+            time.sleep (3)
+
+        print ''
+        print 'Please enter the period of time the pump will sleep for between running cycles'
+        print ''
+
+        try:
+            pumptimesleepinput = int(raw_input())
+
+        except ValueError:
+            print ''
+            print 'Please enter the time in which the pump will sleep for as a valid integer'
+            print ''
+
+
+
 
     else: print 'Please make a valid selection'
     print ''
