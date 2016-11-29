@@ -5,7 +5,7 @@ import datetime
 
 pumpstate = 'off'
 
-while pumpstate == 'off' or 'on':
+while pumpstate in ['on', 'off']:
 #This is because I don't know how to list shit properly yet:
     print ''
     print 'Please choose an option:'
