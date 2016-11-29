@@ -1,6 +1,8 @@
 #This program is written to remotely control a pool pump using a RaspberryPi's GPIO Pins.
 
 import time
+import datetime
+
 import RPi.GPIO as GPIO
 #This configures the GPIO pin numbering scheme
 GPIO.setmode(GPIO.BOARD)
@@ -11,7 +13,7 @@ GPIO.output(11, GPIO.LOW)
 
 pumpstate = 'off'
 
-while pumpstate == 'off' or 'on':
+while pumpstate in ['on', 'off']:
 #This is because I don't know how to list shit properly yet:
     print ''
     print 'Please choose an option:'
@@ -19,6 +21,8 @@ while pumpstate == 'off' or 'on':
     print '1: Enter a new pump state'
     print '2: View current pump state'
     print '3: Set the pump on a timer'
+    print '4: Modify a schedule'
+    print '5: Exit the system'
     print ''
 
     firstmenuselection = raw_input()
@@ -40,16 +44,10 @@ while pumpstate == 'off' or 'on':
         if pumptrueboolean == True:
                 pumpstate = 'on'
                 GPIO.output(11, GPIO.HIGH)
-                print ''
-                print 'The pump is now on'
-                print ''
 
-        elif pumpfalseboolean == True:
+        elif pumpfalseboolean == False:
                 pumpstate = 'off'
                 GPIO.output(11, GPIO.LOW)
-                print ''
-                print 'The pump is now off'
-                print ''
 
         else: print 'Please make a valid selection'
         time.sleep (1)
@@ -73,7 +71,7 @@ while pumpstate == 'off' or 'on':
         print ''
 
         try:
-            pumptimer = int(input())
+            pumptimer = int(raw_input())
 
             pumpstate = 'on'
             GPIO.output(11, GPIO.HIGH)
@@ -85,8 +83,60 @@ while pumpstate == 'off' or 'on':
             print 'Timer has expired, and the pump has been turned off'
             print ''
 
-        except NameError:
+        except ValueError:
             print 'Please enter a valid integer'
+
+
+#SELECTION 4
+
+
+    elif firstmenuselection == '4':
+        try:
+            while pumpstate == 'off':
+
+                print ''
+                print 'Please enter the period of time the pump will run for'
+                print ''
+
+                try:
+                    pumptimeoninput = int(raw_input()) * 60 * 60
+
+                except ValueError:
+                    print ''
+                    print 'Please enter the number of hours the pump will be active for'
+                    print ''
+                    time.sleep (1)
+
+                print ''
+                print 'Please enter the period of time the pump will sleep for between running cycles'
+                print ''
+
+                try:
+                    pumptimesleepinput = int(raw_input()) * 60 * 60
+
+                except ValueError:
+                    print ''
+                    print 'Please enter the time in which the pump will sleep for as a valid integer'
+                    print ''
+
+                while pumpstate == 'on' or 'off':
+
+                    print "Pump has been turned on at", datetime.datetime.now()
+                    pumpstate = 'on'
+                    GPIO.output(11, GPIO.HIGH)
+                    time.sleep (pumptimeoninput)
+                    print "Pump has been turned off at", datetime.datetime.now()
+                    pumpstate = 'off'
+                    GPIO.output(11, GPIO.LOW)
+        except KeyboardInterrupt
+            pass
+
+# SELECTION 5
+
+
+    elif firstmenuselection == '5':
+        quit()
+
 
     else: print 'Please make a valid selection'
     print ''
