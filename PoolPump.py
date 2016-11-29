@@ -1,6 +1,7 @@
 #This program is written to remotely control a pool pump using a RaspberryPi's GPIO Pins.
 
 import time
+import datetime
 
 pumpstate = 'off'
 
@@ -13,6 +14,7 @@ while pumpstate == 'off' or 'on':
     print '2: View current pump state'
     print '3: Set the pump on a timer'
     print '4: Modify a schedule'
+    print '5: Exit the system'
     print ''
 
     firstmenuselection = raw_input()
@@ -77,39 +79,46 @@ while pumpstate == 'off' or 'on':
 
 
     elif firstmenuselection == '4':
-        print ''
-        print 'Please enter the period of time the pump will run for'
-        print ''
 
-        while pumpstate = 'off'
-        try:
-            pumptimeoninput = int(raw_input())
-            pumpstate = 'on'
-            #GPIO ON
-            time.sleep (pumptimeoninput * 60 * 60)
-            pumpstate = 'off'
-            #GPIO OFF
-            
+        while pumpstate == 'off':
 
-        except ValueError:
             print ''
-            print 'Please enter the number of hours for active, and the hours for sleep'
-            print ''
-            time.sleep (3)
-
-        print ''
-        print 'Please enter the period of time the pump will sleep for between running cycles'
-        print ''
-
-        try:
-            pumptimesleepinput = int(raw_input())
-
-        except ValueError:
-            print ''
-            print 'Please enter the time in which the pump will sleep for as a valid integer'
+            print 'Please enter the period of time the pump will run for'
             print ''
 
+            try:
+                pumptimeoninput = int(raw_input())
 
+            except ValueError:
+                print ''
+                print 'Please enter the number of hours the pump will be active for'
+                print ''
+                time.sleep (1)
+
+            print ''
+            print 'Please enter the period of time the pump will sleep for between running cycles'
+            print ''
+
+            try:
+                pumptimesleepinput = int(raw_input()) * 60 * 60
+
+            except ValueError:
+                print ''
+                print 'Please enter the time in which the pump will sleep for as a valid integer'
+                print ''
+
+            while pumpstate == 'on' or 'off':
+
+                print "Pump has been turned on at", datetime.datetime.now()
+                time.sleep (pumptimeoninput)
+                print "Pump has been turned off at", datetime.datetime.now()
+
+
+# SELECTION 5
+
+
+    elif firstmenuselection == '5':
+        quit()
 
 
     else: print 'Please make a valid selection'
