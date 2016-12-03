@@ -128,6 +128,8 @@ while pumpstate in ['on', 'off']:
                     print "Pump has been turned off at", datetime.datetime.now()
                     pumpstate = 'off'
                     GPIO.output(11, GPIO.LOW)
+                    time.sleep(pumptimesleepinput)
+                    
         except KeyboardInterrupt:
             pass
 
